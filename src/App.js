@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form';
+import Searchbar from './components/Searchbar';
+import Table from './components/Table';
+import { useState } from 'react';
 
 function App() {
+  const [expenses,setExpenses]=useState([])
+  const[searchItem,setSearchItem]=useState("")
+
+  const addNewExpense=(newExpense)=>{
+    setExpenses((prev)=>[...prev,newExpense])
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Expense Tracker</h1>
+      <div className='sept'>
+        <Table searchItem={searchItem} expenses={expenses} onSearchChange={setSearchItem}/>
+        <Form addExpense={addNewExpense} />
+      </div>
+
+      
     </div>
   );
 }
